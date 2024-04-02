@@ -257,7 +257,55 @@ namespace Assignment3.Utility
 
         public void Replace(User value, int index)
         {
-            throw new NotImplementedException();
+            Node tempNode = Head;
+
+            if (index < 0)
+            {
+                throw new IndexOutOfRangeException("Index is out of bounds!");
+            }
+
+            if (Head == null)
+            {
+                throw new Exception("This is an empty list");
+            }
+
+            if (index == 0)
+            {
+                Head.Data = value;
+                return;
+            }
+
+            int currentIndex = 0;
+
+            while (tempNode != null && currentIndex < index - 1)
+            {
+                tempNode = tempNode.Next;
+                currentIndex++;
+            }
+
+            if (tempNode == null || tempNode.Next == null)
+            {
+                throw new IndexOutOfRangeException("Index is out of bounds!");
+            }
+
+            tempNode.Next.Data = value;
+        }
+
+        // Special Method - Reverse List
+        public void Reverse() 
+        {
+            int count = Count();
+            int index = 1;
+            Node tempNode = Head;
+
+            while (count > 0)
+            {
+                AddFirst(tempNode.Data);
+                Remove(index);
+                tempNode = tempNode.Next;
+                count--;
+                index++;
+            }
         }
     }
 }

@@ -12,7 +12,6 @@ namespace Assignment3
         public static void Main(string[] args) 
         {
             Console.WriteLine("Welcome to this solution of Assignment 3.");
-
         }
     }
 }
