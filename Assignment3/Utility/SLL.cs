@@ -15,6 +15,7 @@ namespace Assignment3.Utility
         public void Add(User value, int index)
         {
             Node tempNode = Head;
+            Node newNode = new Node(value);
 
             if (index < 0)
             {
@@ -30,8 +31,8 @@ namespace Assignment3.Utility
 
             if (index == 0)
             {
-                tempNode.Next = Head;
-                Head = tempNode;
+                newNode.Next = Head;
+                Head = newNode;
                 return;
             }
 
@@ -48,9 +49,9 @@ namespace Assignment3.Utility
                 throw new IndexOutOfRangeException("Index is out of bounds!");
             }
 
-            Node newNode = new Node(value);
-            newNode.Next = tempNode.Next
-            tempNode.Next = tempNode.Next.Next;
+            
+            newNode.Next = tempNode.Next;
+            tempNode.Next = newNode;
         }
 
         public void AddFirst(User value)
