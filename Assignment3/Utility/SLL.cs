@@ -183,10 +183,10 @@ namespace Assignment3.Utility
 
         public bool IsEmpty()
         {
-            bool isEmpty = false;
-
-            if (Head != null) { isEmpty = true; }
-
+            bool isEmpty = true;
+        
+            if (Head != null) { isEmpty = false; }
+        
             return isEmpty;
         }
 
