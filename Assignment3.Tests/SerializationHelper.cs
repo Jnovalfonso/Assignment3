@@ -5,37 +5,50 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
+using Assignment3.Utility;
+using NUnit.Framework.Internal.Execution;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Assignment3.Tests
 {
     public static class SerializationHelper
     {
-        /// <summary>
-        /// Serializes (encodes) users
-        /// </summary>
-        /// <param name="users">List of users</param>
-        /// <param name="fileName"></param>
-        public static void SerializeUsers(ILinkedListADT users, string fileName)
+        static private string _basePath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+        public static void SerializeUsers(SLL users, string fileName)
         {
-            DataContractSerializer serializer = new DataContractSerializer(typeof(List<User>));
+            fileName = _basePath + "\\BinSerialization" + fileName;
+
+            DataContractSerializer serializer = new DataContractSerializer(typeof(Node));
             using (FileStream stream = File.Create(fileName))
             {
-                serializer.WriteObject(stream, users);
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    Node tempNode = users.Head;
+                    while (tempNode != null)
+                    {
+                        serializer.WriteObject(writer.BaseStream, tempNode);
+                        tempNode = tempNode.Next;
+                    }
+                    
+                }
             }
+        }
+        public static SLL DeserializeUsers(string fileName)
+        {
+            SLL userList = new SLL();
+            fileName = _basePath + "\\BinSerialization" + fileName;
+            DataContractSerializer serializer = new DataContractSerializer(typeof(Node));
+
+            using (FileStream stream = new FileStream(fileName, FileMode.Open))
+            {
+                while (stream.Position < stream.Length)
+                {
+                    Node deserializedNode = (Node)serializer.ReadObject(stream);
+                    userList.AddLast(deserializedNode.Data);
+                }
+            }
+            return userList;
         }
 
-        /// <summary>
-        /// Deserializes (decodes) users
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <returns>List of users</returns>
-        public static ILinkedListADT DeserializeUsers(string fileName)
-        {
-            DataContractSerializer serializer = new DataContractSerializer(typeof(List<User>));
-            using (FileStream stream = File.OpenRead(fileName))
-            {
-                return (ILinkedListADT)serializer.ReadObject(stream);
-            }
-        }
-    }
+    }            
 }

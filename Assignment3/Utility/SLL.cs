@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Assignment3.Utility
 {
+    [DataContract]
     public class SLL : ILinkedListADT
     {
+        [DataMember]
         public Node Head;
 
         public void Add(User value, int index)
@@ -183,9 +186,9 @@ namespace Assignment3.Utility
 
         public bool IsEmpty()
         {
-            bool isEmpty = false;
+            bool isEmpty = true;
 
-            if (Head != null) { isEmpty = true; }
+            if (Head != null) { isEmpty = false; }
 
             return isEmpty;
         }
