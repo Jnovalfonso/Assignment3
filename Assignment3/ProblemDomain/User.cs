@@ -1,23 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Assignment3
 {
-    [DataContract]
+    [Serializable]
     public class User : IEquatable<User>
     {
-        [DataMember]
         public int Id { get; private set; }
-        [DataMember]
         public string Name { get; private set; }
-        [DataMember]
         public string Email { get; private set; }
-        [DataMember]
         public string Password { get; private set; }
+
 
         public User(int id, string name, string email, string password)
         {
@@ -43,7 +39,7 @@ namespace Assignment3
         public override bool Equals(Object other)
         {
             if (!(other is User otherUser))
-			    return false;
+                return false;
 
             return Id == otherUser.Id && Name.Equals(otherUser.Name) && Email.Equals(otherUser.Email);
         }
@@ -65,6 +61,14 @@ namespace Assignment3
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Email);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Password);
             return hashCode;
+        }
+
+        public override string ToString()
+        {
+            return $"Id = {Id}" +
+                $"Name = {Name}" +
+                $"Email = {Email}" +
+                $"Password = {Password}";
         }
     }
 }
