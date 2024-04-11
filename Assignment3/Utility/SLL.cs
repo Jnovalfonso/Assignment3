@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Assignment3.Utility
 {
-    [DataContract]
+    [Serializable]
     public class SLL : ILinkedListADT
     {
-        [DataMember]
         public Node Head;
 
         public void Add(User value, int index)
@@ -52,13 +50,13 @@ namespace Assignment3.Utility
                 throw new IndexOutOfRangeException("Index is out of bounds!");
             }
 
-            
+
             newNode.Next = tempNode.Next;
             tempNode.Next = newNode;
         }
 
         public void AddFirst(User value)
-        {  
+        {
             Node newNode = new Node(value);
 
             newNode.Next = Head;
@@ -68,7 +66,7 @@ namespace Assignment3.Utility
 
         public void DisplayList()
         {
-          
+
             Node tempNode = Head;
             int count = 0;
 
@@ -85,13 +83,13 @@ namespace Assignment3.Utility
             Node newNode = new Node(value);
             Node tempNode = Head;
 
-            if(Head == null)
+            if (Head == null)
             {
                 Head = newNode;
                 return;
             }
 
-            while (tempNode.Next != null) 
+            while (tempNode.Next != null)
             {
                 tempNode = tempNode.Next;
             }
@@ -145,13 +143,13 @@ namespace Assignment3.Utility
             {
                 throw new IndexOutOfRangeException("Index is out of bounds!");
             }
-            if(Head == null)
+            if (Head == null)
             {
                 throw new Exception("This is a Empty List");
             }
-            while(tempNode != null)
+            while (tempNode != null)
             {
-                if(currentIndex == index)
+                if (currentIndex == index)
                 {
                     User foundUser = tempNode.Data;
                     Console.WriteLine($"Name: {foundUser.Name}\nEmail: {foundUser.Email}\nId: {foundUser.Id} \n");
@@ -174,7 +172,7 @@ namespace Assignment3.Utility
             {
                 if (tempNode.Data.Equals(value))
                 {
-                    return count; 
+                    return count;
                 }
                 count++;
                 tempNode = tempNode.Next;
@@ -231,13 +229,13 @@ namespace Assignment3.Utility
 
         public void RemoveFirst()
         {
-           if (Head == null)
+            if (Head == null)
             {
                 throw new Exception("This is an Empty List");
             }
-           Node tempNode = Head;
+            Node tempNode = Head;
             tempNode = tempNode.Next;
-           Head = tempNode;
+            Head = tempNode;
 
         }
 
@@ -250,7 +248,7 @@ namespace Assignment3.Utility
 
             Node tempNode = Head;
             Node previousNode = null;
-            while(tempNode.Next != null)
+            while (tempNode.Next != null)
             {
                 previousNode = tempNode;
                 tempNode = tempNode.Next;
@@ -294,8 +292,36 @@ namespace Assignment3.Utility
             tempNode.Next.Data = value;
         }
 
+        //public void serializeUser(string FileName)
+        //{
+        //    Node current = Head;
+        //    List<User> users = new List<User>();
+        //    while (current != null)
+        //    {
+        //        users.Add((User)current.Data);
+        //        current = current.Next;
+        //    }
+
+        //    SerializationHelper.SerializeUsers(users, FileName);
+        //    Console.WriteLine("Serialization Completed...");
+        //}
+
+        //public void deserializeUser(string FileName)
+        //{
+        //    this.Clear();
+
+        //    List<User> users = (List<User>)SerializationHelper.DeserializeUsers(FileName);
+
+        //    foreach (User user in users)
+        //    {
+        //        this.AddLast(user);
+        //    }
+
+        //    Console.WriteLine("User Deserialization Completed...");
+        //}
+
         // Special Method - Reverse List
-        public void Reverse() 
+        public void Reverse()
         {
             int count = Count();
             int index = 1;

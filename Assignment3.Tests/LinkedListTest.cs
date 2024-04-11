@@ -33,7 +33,7 @@ namespace Assignment3.Tests
         }
 
         [Test]
-        public void item_isAppended() 
+        public void item_isAppended()
         {
             _linkedList.AddLast(new User(2, "User 2 ", "user2@gmail.com", "userpass2"));
             Assert.IsFalse(_linkedList.IsEmpty());
@@ -57,7 +57,7 @@ namespace Assignment3.Tests
             _linkedList.AddFirst(new User(2, "User 2", "user2@gmail.com", "userpass2"));
             _linkedList.AddFirst(new User(3, "User 3", "user3@gmail.com", "userpass3"));
             _linkedList.AddFirst(new User(4, "User 4", "user4@gmail.com", "userpass4"));
-            _linkedList.Replace(new User(6, "User Replace", "Replaceuser@gmail.com", "Replacepass3"),2);
+            _linkedList.Replace(new User(6, "User Replace", "Replaceuser@gmail.com", "Replacepass3"), 2);
 
             Assert.AreEqual("User Replace", _linkedList.GetValue(2).Name);
         }
@@ -78,7 +78,7 @@ namespace Assignment3.Tests
             _linkedList.AddFirst(new User(3, "User 3", "user3@gmail.com", "userpass3"));
             _linkedList.AddFirst(new User(4, "User 4", "user4@gmail.com", "userpass4"));
             _linkedList.RemoveLast();
-            Assert.AreEqual(null,_linkedList.GetValue(3));
+            Assert.AreEqual(null, _linkedList.GetValue(3));
         }
 
         [Test]
