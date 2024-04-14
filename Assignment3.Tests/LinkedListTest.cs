@@ -67,7 +67,7 @@ namespace Assignment3.Tests
         {
             _linkedList.AddFirst(new User(1, "User 1", "user1@gmail.com", "userpass1"));
             _linkedList.RemoveFirst();
-            Assert.IsTrue(_linkedList.IsEmpty());
+            Assert.IsTrue(_linkedList.IsEmpty()); 
         }
 
         [Test]
