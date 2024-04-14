@@ -7,7 +7,7 @@ namespace Assignment3.Tests
     [TestFixture]
     public class SerializationTests
     {
-        private ILinkedListADT users;
+        private ILinkedListADT users; 
         private string basePath;
         private string pathTxt;
 
